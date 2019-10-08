@@ -79,7 +79,7 @@ export const ScriptsHome = React.memo(() => {
 				console.log('calculated:', input, scripts, res);
 			} else if (res.ex) {
 				setStatus(STATUS_ERROR_ENCOUNTERED);
-				setResults(JSON.stringify(res.ex));
+				setResults(res.ex.name + ': ' + res.ex.message);
 				console.log('error:', input, scripts, res.ex.name, res.ex.message, res.ex.stack);
 			}
 		}, pausingTime);
@@ -105,16 +105,22 @@ export const ScriptsHome = React.memo(() => {
 		<ScriptsPanel
 			label={'Raw Scripts'}
 			children={(
-				<textarea className={classes.textArea} onChange={(event) => onTextChanged('scripts', event.target.value)} value={rawScripts}/>
+				<textarea className={classes.textScripts} onChange={(event) => onTextChanged('scripts', event.target.value)} value={rawScripts}/>
 			)}
 		/>
 	);
+	const _res: React.ReactNode[] = [];
+	_res.push(<textarea className={classes.textArea} onChange={(event) => onTextChanged('results', event.target.value)} value={editedResults || results || ''}/>);
+	if (results && status === STATUS_CALCULATED) {
+		if (typeof results === 'object') {
+			_res.push(<textarea className={classes.textArea} value={JSON.stringify(results)}/>);
+			_res.push(<textarea className={classes.textArea} value={JSON.stringify(results, undefined, '\t')}/>);
+		}
+	}
 	const renderResults = () => (
 		<ScriptsPanel
 			label={`Raw Results(${status})`}
-			children={(
-				<textarea className={classes.textArea} onChange={(event) => onTextChanged('results', event.target.value)} value={editedResults || results}/>
-			)}
+			children={_res}
 		/>
 	);
 
