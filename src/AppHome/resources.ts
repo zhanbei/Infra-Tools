@@ -1,6 +1,10 @@
 'use strict';
 
 export const R = {
-	title: 'React MaterialUI ReactRouter Webpack Babel NPM Start HERE',
-	description: 'A basic front-end project integrated with React, MaterialUI, ReactRouter, Webpack, Babel, NPM.',
+	title: 'Text Tailor',
+	description:
+		'A collection of tools to tailor texts, ' +
+		'parse given texts with built-in formatters, ' +
+		'render to text from the structured data, ' +
+		'for developers and possible people.',
 };

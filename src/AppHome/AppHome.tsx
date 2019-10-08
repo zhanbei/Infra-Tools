@@ -4,6 +4,7 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import {ScriptsHome} from '../ScriptsHome/ScriptsHome';
 import {R} from './resources';
 import {useStyles} from './styles';
 
@@ -22,8 +23,8 @@ export const AppHome = () => {
 
 	const renderAppBody = () => (
 		<div className={classes.mainContentWithPaddingHolder}>
-			<h1>{title}</h1>
 			<p>{R.description}</p>
+			{<ScriptsHome/>}
 		</div>
 	);
 
