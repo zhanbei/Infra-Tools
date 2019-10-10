@@ -17,6 +17,10 @@ export const doEvalScripts = (input: string, scripts: string): IRes => {
 	if (!_scripts) {return {};}
 	try {
 		const output = eval(_scripts);
+		if (typeof output === 'function') {
+			const final = output($input);
+			return {output: final};
+		}
 		return {output};
 	} catch (ex) {
 		return {ex};
