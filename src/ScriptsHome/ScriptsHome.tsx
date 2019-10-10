@@ -1,6 +1,9 @@
 'use strict';
 
 import React from 'react';
+import {jsonStringifyWithOptions} from './builtin-scripts/stringify-object';
+import {IScriptDefinition} from './builtin-scripts/builtin-scripts';
+import {NavButtons} from './NavButtons';
 import {ScriptsPanel} from './ScriptsPanels';
 import {doEvalScripts} from './eval-scripts';
 import {R} from './resources';
@@ -20,18 +23,24 @@ const STATUS_WAITING: STATUSES = 'waiting';
 const STATUS_CALCULATED: STATUSES = 'calculated';
 const STATUS_ERROR_ENCOUNTERED: STATUSES = 'error';
 
+interface IResult {
+	raw?: string | object;
+	text: string;
+}
+
 export const ScriptsHome = React.memo(() => {
 	const classes = useStyles();
 
 	const [input, setInput] = React.useState('');
 	const [rawScripts, setRawScripts] = React.useState('');
 	// const [useRawScripts, setUseRawScripts] = React.useState(false);
-	const [results, setResults] = React.useState('');
+	const [results, setResults] = React.useState({text: ''} as IResult);
 	const [editedResults, setEditedResults] = React.useState('');
 	const [status, setStatus] = React.useState(STATUS_INITIALIZED as STATUSES);
+	const [builtinScripts, setSelectedBuiltinScripts] = React.useState(undefined as IScriptDefinition | undefined);
 
 	const renderAppBody = () => (
-		<div>
+		<div style={{flex: 1}}>
 			<div className={classes.boxHolder}>
 				<div className={classes.boxLeftPanels}>
 					{renderUserInput()}
@@ -67,19 +76,26 @@ export const ScriptsHome = React.memo(() => {
 	const doCalculate = (input: string, scripts: string) => {
 		latestTime = +new Date();
 		if (!input || !input.trim()) {return setStatus(STATUS_NO_INPUT);}
-		if (!scripts || !scripts.trim()) {return setStatus(STATUS_NO_SCRIPTS);}
+		if (!builtinScripts && (!scripts || !scripts.trim())) {return setStatus(STATUS_NO_SCRIPTS);}
 		setStatus(STATUS_WAITING);
 
 		setTimeout(() => {
 			if (+new Date() < latestTime + pausingTime) {return;}
+			if (builtinScripts) {
+				const result = builtinScripts.handleInput(input);
+				setStatus(STATUS_CALCULATED);
+				setResults({raw: result, text: ''});
+				console.log('calculated:', input, scripts, result);
+				return;
+			}
 			const res = doEvalScripts(input, scripts);
 			if (res.output) {
 				setStatus(STATUS_CALCULATED);
-				setResults(res.output);
+				setResults({raw: res.output, text: ''});
 				console.log('calculated:', input, scripts, res);
 			} else if (res.ex) {
 				setStatus(STATUS_ERROR_ENCOUNTERED);
-				setResults(res.ex.name + ': ' + res.ex.message);
+				setResults({raw: res.ex, text: res.ex.name + ': ' + res.ex.message});
 				console.log('error:', input, scripts, res.ex.name, res.ex.message, res.ex.stack);
 			}
 		}, pausingTime);
@@ -87,7 +103,7 @@ export const ScriptsHome = React.memo(() => {
 
 	const renderUserInput = () => (
 		<ScriptsPanel
-			label={'Input'}
+			label={builtinScripts ? `Input(${builtinScripts.labelInput})` : 'Input'}
 			children={(
 				<textarea className={classes.textArea} onChange={(event) => onTextChanged('input', event.target.value)} value={input}/>
 			)}
@@ -101,33 +117,33 @@ export const ScriptsHome = React.memo(() => {
 			)}
 		/>
 	);
-	const renderRawScripts = () => (
+	const renderRawScripts = () => !builtinScripts ? (
 		<ScriptsPanel
 			label={'Raw Scripts'}
 			children={(
 				<textarea className={classes.textScripts} onChange={(event) => onTextChanged('scripts', event.target.value)} value={rawScripts}/>
 			)}
 		/>
-	);
-	const _res: React.ReactNode[] = [];
-	_res.push(<textarea className={classes.textArea} onChange={(event) => onTextChanged('results', event.target.value)} value={editedResults || results || ''}/>);
-	if (results && status === STATUS_CALCULATED) {
-		if (typeof results === 'object') {
-			_res.push(<textarea className={classes.textArea} value={JSON.stringify(results)}/>);
-			_res.push(<textarea className={classes.textArea} value={JSON.stringify(results, undefined, '\t')}/>);
+	) : undefined;
+	if (!results.text) {
+		if (typeof results.raw === 'object') {
+			results.text = jsonStringifyWithOptions(results.raw, {useTabs: true, noQuotesForKeys: true});
+		} else {
+			results.text = results.raw || '';
 		}
 	}
 	const renderResults = () => (
 		<ScriptsPanel
-			label={`Raw Results(${status})`}
-			children={_res}
+			label={builtinScripts ? `${builtinScripts.labelResult}(${status})` : `Raw Results(${status})`}
+			children={<textarea className={classes.textArea} onChange={(event) => onTextChanged('results', event.target.value)} value={editedResults || results.text || ''}/>}
 		/>
 	);
 
 
 	document.title = title;
 	return (
-		<div>
+		<div style={{display: 'flex'}}>
+			<NavButtons onSelected={setSelectedBuiltinScripts}/>
 			{renderAppBody()}
 		</div>
 	);
