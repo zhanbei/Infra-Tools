@@ -1,9 +1,10 @@
 'use strict';
 
 import React from 'react';
-import {jsonStringifyWithOptions} from './builtin-scripts/stringify-object';
+import {IStringifyOptions, jsonStringifyWithOptions} from './builtin-scripts/stringify-object';
 import {IScriptDefinition} from './builtin-scripts/builtin-scripts';
 import {NavButtons} from './NavButtons';
+import {ResultOptions} from './ResultOptions';
 import {ScriptsPanel} from './ScriptsPanels';
 import {doEvalScripts} from './eval-scripts';
 import {R} from './resources';
@@ -38,9 +39,14 @@ export const ScriptsHome = React.memo(() => {
 	const [editedResults, setEditedResults] = React.useState('');
 	const [status, setStatus] = React.useState(STATUS_INITIALIZED as STATUSES);
 	const [builtinScripts, setSelectedBuiltinScripts] = React.useState(undefined as IScriptDefinition | undefined);
+	const [stringifyOptions, setStringifyOptions] = React.useState({} as IStringifyOptions);
+
+	React.useEffect(() => {
+		doCalculate(input, rawScripts);
+	}, [builtinScripts]);
 
 	const renderAppBody = () => (
-		<div style={{flex: 1}}>
+		<div style={{flex: 1, margin: '0 auto', maxWidth: '960px'}}>
 			<div className={classes.boxHolder}>
 				<div className={classes.boxLeftPanels}>
 					{renderUserInput()}
@@ -125,9 +131,9 @@ export const ScriptsHome = React.memo(() => {
 			)}
 		/>
 	) : undefined;
-	if (!results.text) {
+	if (!results.text || true) {
 		if (typeof results.raw === 'object') {
-			results.text = jsonStringifyWithOptions(results.raw, {useTabs: true, noQuotesForKeys: true});
+			results.text = jsonStringifyWithOptions(results.raw, stringifyOptions);
 		} else {
 			results.text = results.raw || '';
 		}
@@ -145,6 +151,7 @@ export const ScriptsHome = React.memo(() => {
 		<div style={{display: 'flex'}}>
 			<NavButtons onSelected={setSelectedBuiltinScripts}/>
 			{renderAppBody()}
+			<ResultOptions onChange={setStringifyOptions}/>
 		</div>
 	);
 });

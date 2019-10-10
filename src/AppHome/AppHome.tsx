@@ -24,7 +24,6 @@ export const AppHome = () => {
 	const renderAppBody = () => (
 		<div className={classes.mainContentWithPaddingHolder}>
 			<p>{R.description}</p>
-			{<ScriptsHome/>}
 		</div>
 	);
 
@@ -34,6 +33,7 @@ export const AppHome = () => {
 			{renderAppBar()}
 			<div className={classes.toolbar}/>
 			{renderAppBody()}
+			{<ScriptsHome/>}
 		</div>
 	);
 };
