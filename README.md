@@ -28,6 +28,12 @@ A collection of tools to tailor texts, parse given texts with built-in formatter
 - Post Script
 - Post Result
 
+## Builtin Scripts
+
+1. CSS TO CSS-in-JS( and Back)
+1. Base64 Encoder and Decoder
+1. URL Encoder
+
 ## Operations
 
 ```js
@@ -108,24 +114,6 @@ Object Panel
 	- URL Encoder
 - Objects to Excel
 - Objects to Markdown List
-
-### CSS-in-JS
-
-```js
-// @see https://stackoverflow.com/questions/8987550/convert-css-text-to-javascript-object
-// @ref https://staxmanade.com/CssToReact/
-(cssText) => {
-    var cssTxt = cssText.replace(/\/\*(.|\s)*?\*\//g, " ").replace(/\s+/g, " ");
-    var style = {}, [,ruleName,rule] = cssTxt.match(/ ?(.*?) ?{([^}]*)}/)||[,,cssTxt];
-    var cssToJs = s => s.replace(/\W+\w/g, match => match.slice(-1).toUpperCase());
-    var properties = rule.split(";").map(o => o.split(":").map(x => x && x.trim()));
-    for (var [property, value] of properties) style[cssToJs(property)] = value;
-    return {cssText, ruleName, style};
-}
-
-s = JSON.stringify(o, null, '\t');
-s.replace(/\t"/g, '\t').replace(/":/g, ':');
-```
 
 ## Variables
 
