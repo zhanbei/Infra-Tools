@@ -1,6 +1,6 @@
 'use strict';
 
-import {IScriptConverter} from 'src/ScriptsHome/builtin-scripts/builtin-scripts';
+import {IScriptConverter} from './builtin-scripts';
 
 const cssToJs = (s: string) => s.replace(/\W+\w/g, match => match.slice(-1).toUpperCase());
 

@@ -1,6 +1,6 @@
 'use strict';
 
-import {ScriptCssInJs} from 'src/ScriptsHome/builtin-scripts/css-in-js';
+import {ScriptCssInJs} from './css-in-js';
 
 export interface IBaseScript {
 	name: string;
