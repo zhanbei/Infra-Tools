@@ -17,7 +17,15 @@ existed here.
 
 A collection of tools to tailor texts, parse given texts with built-in formatters, render to text from the structured data, for developers and potential people.
 
-## Instructions
+## A. Instructions
+
+Make use of the tools and contribute.
+
+### Available Applications
+
+1. `Plain CSS` TO `CSS-in-JS`( and Back)
+1. Base64 Encoder and Decoder
+1. URL Encoder and Decoder
 
 ### Patterns
 
@@ -25,10 +33,16 @@ There are 2 kinds of use cases:
 
 1. Directional Mode
 
-	Input -> Result
+	Input -> Result -> Post Result
 
 	1. General Mode
 		- Execute
+		- Render
+
+			May be used as post scripts.
+
+			- Objects to Excel
+			- Objects to Markdown List
 	1. Special Mode
 		- Lines Mode
 1. Bidirectional Mode
@@ -38,16 +52,11 @@ There are 2 kinds of use cases:
 	- Convert Between
 	- Encoder and Decoder
 
-## Builtin Scripts
+## B. App Structure
 
-1. CSS TO CSS-in-JS( and Back)
-1. Base64 Encoder and Decoder
-1. URL Encoder
+Understanding the App.
 
-
-## Panels and Editors
-
-## Core Panels and Editors
+### Core Panels and Editors
 
 There are basically 3 types of panels to focus on for a specific task:
 
@@ -125,7 +134,11 @@ While additional views to assist the overall tasks:
 	- Use Single Quotes( for Keys and Values)
 	- No Quotes for Keys
 
-## Operations
+## C. Investigate On
+
+About the features, designs, development details, and etc.
+
+### Operations
 
 ```js
 s.split('\n').map(line=>line.trim()).map(line=>line.endsWith(';')?line.substr(0, line.length -1 ): line).join('\n')
@@ -150,7 +163,7 @@ Operations are ordered, with chaining rules.
 	- Name Key
 - Custom Function
 
-Default
+Default Blockly Flow:
 
 - Trim
 - Parse JSON if Okay
@@ -159,17 +172,7 @@ Default
 - Stringify
 
 
-## Applications
-
-- Converters Between
-	- `Plain CSS` and `CSS-in-JS`
-- Encoders
-	- Base64
-	- URL Encoder
-- Objects to Excel
-- Objects to Markdown List
-
-## Histories
+### Histories
 
 - Texts Given
 - Scripts Executed
@@ -177,7 +180,7 @@ Default
 - Stared Input and Output
 
 
-## Implementations
+### Implementations
 
 <!-- > 2019-10-08T14:14:12+0800 -->
 
@@ -211,7 +214,7 @@ Default
 
 
 
-## References
+## D. References
 
 - EJS
 - [Blockly - Google Developers](https://developers.google.com/blockly/)
