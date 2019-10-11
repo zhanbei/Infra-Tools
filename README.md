@@ -17,7 +17,37 @@ existed here.
 
 A collection of tools to tailor texts, parse given texts with built-in formatters, render to text from the structured data, for developers and potential people.
 
+## Instructions
+
+### Patterns
+
+There are 2 kinds of use cases:
+
+1. Directional Mode
+
+	Input -> Result
+
+	1. General Mode
+		- Execute
+	1. Special Mode
+		- Lines Mode
+1. Bidirectional Mode
+
+	Input <-> Result -> Post Result
+
+	- Convert Between
+	- Encoder and Decoder
+
+## Builtin Scripts
+
+1. CSS TO CSS-in-JS( and Back)
+1. Base64 Encoder and Decoder
+1. URL Encoder
+
+
 ## Panels and Editors
+
+## Core Panels and Editors
 
 There are basically 3 types of panels to focus on for a specific task:
 
@@ -67,8 +97,7 @@ There are basically 3 types of panels to focus on for a specific task:
 	- Middle Results
 	- Post Result
 
-- Input
-- Post Result
+### App Views
 
 While additional views to assist the overall tasks:
 
@@ -82,23 +111,19 @@ While additional views to assist the overall tasks:
 		- [ ] Raw Scripts
 		- [ ] Operations
 1. Input Pre-process Options
+	- Trim User Input
 	- Split by [ \n | ; | , | : ];
 	- Join with [ \n | ; | , | : ];
 1. Result Options
 
 	Stringify the object result to string following options.
 
-	- Minified
+	- Minified ~~| Prettify( with Tabs/Spaces)~~
 	- with Tabs
 	- with Spaces
+	- Sort Keys
 	- Use Single Quotes( for Keys and Values)
 	- No Quotes for Keys
-
-## Builtin Scripts
-
-1. CSS TO CSS-in-JS( and Back)
-1. Base64 Encoder and Decoder
-1. URL Encoder
 
 ## Operations
 
@@ -134,28 +159,10 @@ Default
 - Stringify
 
 
-## Renders
-
-## Patterns
-
-1. Convert Between
-	- Input <-> Result -> Post Result
-	- Options
-1. Execute
-	- Input -> Result
-	- Options
-
 ## Applications
 
 - Converters Between
 	- `Plain CSS` and `CSS-in-JS`
-		- JSON Stringify
-			- One-line
-			- Prettier
-		- JS
-			- Single Quotes
-			- No Key Quotes
-			- Sort Key
 - Encoders
 	- Base64
 	- URL Encoder
