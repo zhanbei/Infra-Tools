@@ -44,7 +44,15 @@ There are basically 3 types of panels to focus on for a specific task:
 		Visualized code editor with "Google Blockly".
 
 	- Raw Script
+		- Variables
+			- `$input` Raw Input
+			- `$lines` Split by `$separator`
+			- `$_lines` Filtered out Empty Lines
+		- Functions
+			- `$visualize` Stash and visualize middle results, for potential debugging.
 	- Post Script
+
+		Post scripts are used to alter the current results a step further, to make the result more acceptable.
 
 3. Results
 
@@ -54,10 +62,37 @@ There are basically 3 types of panels to focus on for a specific task:
 
 	- Visualization of Parsed Results
 
+		Interactive or with Syntax
+
+	- Middle Results
 	- Post Result
 
 - Input
 - Post Result
+
+While additional views to assist the overall tasks:
+
+1. Apps Choices
+	- @see [#Builtin-Scripts](#builtin-scripts)
+1. Views Options
+	- Mode
+		- General(Clean) Mode
+		- Developer(Verbose) Mode
+	- Selections
+		- [ ] Raw Scripts
+		- [ ] Operations
+1. Input Pre-process Options
+	- Split by [ \n | ; | , | : ];
+	- Join with [ \n | ; | , | : ];
+1. Result Options
+
+	Stringify the object result to string following options.
+
+	- Minified
+	- with Tabs
+	- with Spaces
+	- Use Single Quotes( for Keys and Values)
+	- No Quotes for Keys
 
 ## Builtin Scripts
 
@@ -101,10 +136,6 @@ Default
 
 ## Renders
 
-## Visualizations
-
-Middle
-
 ## Patterns
 
 1. Convert Between
@@ -113,21 +144,6 @@ Middle
 1. Execute
 	- Input -> Result
 	- Options
-
-Object Panel
-
-- Object -> JSON(Minified/Tabbed/Interactive/Object-in-JS)
-- Interactive
-- JSON
-	- Minified
-	- with Tabs
-	- with Spaces
-- Object-in-JS
-	- Minified
-	- with Tabs
-	- with Spaces
-	- Use Single Quotes( for Keys and Values)
-	- No Quotes for Keys
 
 ## Applications
 
@@ -145,12 +161,6 @@ Object Panel
 	- URL Encoder
 - Objects to Excel
 - Objects to Markdown List
-
-## Variables
-
-- $input
-- ${1}
-- ${1}
 
 ## Histories
 
