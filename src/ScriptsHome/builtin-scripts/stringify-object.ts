@@ -20,10 +20,11 @@ export const jsonStringifyWithOptions = (o: object, {minified, useTabs, useSpace
 	// TO-DO Check out the usage of replacer.
 	let json = JSON.stringify(o, undefined, separator);
 	if (noQuotesForKeys) {
+		// FIX-ME Search for the RIGHT way to do so, especially for arrays.
 		json = json.replace(/":/g, ':');
-		if (minified) {json = json.replace(/,"/g, ',');}
+		if (minified) {json = json.replace(/,"/g, ',').replace(/{"/g, '{');}
 		if (useTabs) {json = json.replace(/\t"/g, '\t');}
-		if (useSpaces) {json = json.replace(/ "/g, ' ');}
+		if (useSpaces) {json = json.replace(/ {4}"/g, '    ');}
 	}
 	if (useSingleQuotes) {json = json.replace(/"/g, '\'');}
 	return json;
