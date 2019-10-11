@@ -15,7 +15,24 @@ interface IProps {
 	onChange: (options: IStringifyOptions) => any;
 }
 
+const OPTIONS_BASE = {minified: false, useTabs: false, useSpaces: false, useSingleQuotes: false, noQuotesForKeys: false};
 const defaultOptions: IStringifyOptions = {useTabs: true, noQuotesForKeys: true};
+const OPTIONS_MINIFIED: IStringifyOptions = {...OPTIONS_BASE, minified: true};
+const OPTIONS_TABBED: IStringifyOptions = {...OPTIONS_BASE, useTabs: true};
+const OPTIONS_JS: IStringifyOptions = {...OPTIONS_BASE, useTabs: true, useSingleQuotes: true, noQuotesForKeys: true};
+
+const getOptionsBySet = (set: string): IStringifyOptions => {
+	switch (set) {
+		case 'minified':
+			return OPTIONS_MINIFIED;
+		case 'tabbed':
+			return OPTIONS_TABBED;
+		case 'js':
+			return OPTIONS_JS;
+		default:
+			return defaultOptions;
+	}
+};
 
 // type IOptionsSet = 'minified' | 'tabbed' | 'spaced'
 
@@ -41,12 +58,11 @@ const getTypeByOptions = ({minified, useTabs}: IStringifyOptions): string => {
 
 export const ResultOptions = React.memo(({onChange}: IProps) => {
 	const [set, doSetOptionsSet] = React.useState('tabbed');
-	const [options, doSetOptions] = React.useState(defaultOptions);
-
-	console.log('current soptions:', options);
+	const [options, doSetOptions] = React.useState(getOptionsBySet(set));
 
 	const setOptionsSet = (set: string) => {
 		doSetOptionsSet(set);
+		updateOptions(getOptionsBySet(set));
 	};
 
 	const updateOptions = (p: Partial<IStringifyOptions>) => {
@@ -69,7 +85,7 @@ export const ResultOptions = React.memo(({onChange}: IProps) => {
 				<RadioGroup name='options-type' value={getTypeByOptions(options)} onChange={(event: React.ChangeEvent<HTMLInputElement>) => updateOptions(getOptionsByType(event.target.value))} row>
 					<FormControlLabel label='Minified JSON' value='minified' control={<Radio color='primary'/>}/>
 					<FormControlLabel label='Use Tabs' value='tabs' control={<Radio color='primary'/>}/>
-					<FormControlLabel label='Use Spaced' value='spaces' control={<Radio color='primary'/>}/>
+					<FormControlLabel label='Use Spaces' value='spaces' control={<Radio color='primary'/>}/>
 				</RadioGroup>
 			</FormControl>
 			<FormGroup>
