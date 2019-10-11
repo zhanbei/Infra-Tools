@@ -21,7 +21,7 @@ A collection of tools to tailor texts, parse given texts with built-in formatter
 
 Make use of the tools and contribute.
 
-### Available Applications
+### Available Tools
 
 1. `Plain CSS` TO `CSS-in-JS`( and Back)
 1. Base64 Encoder and Decoder
@@ -110,8 +110,8 @@ There are basically 3 types of panels to focus on for a specific task:
 
 While additional views to assist the overall tasks:
 
-1. Apps Choices
-	- @see [#Builtin-Scripts](#builtin-scripts)
+1. Tools Selection / Navigation
+	- @see [#Available-Tools](#available-tools)
 1. Views Options
 	- Mode
 		- General(Clean) Mode

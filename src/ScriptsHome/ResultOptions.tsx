@@ -78,7 +78,7 @@ export const ResultOptions = React.memo(({onChange}: IProps) => {
 				value={set} indicatorColor="primary" textColor="primary"
 				onChange={(event, tab) => setOptionsSet(tab)}
 			>
-				<Tab label="JS Object" value='js'/>
+				<Tab label="Object in Code" value='js'/>
 				<Tab label="Minified JSON" value='minified'/>
 				<Tab label="Tabbed JSON" value='tabbed'/>
 			</Tabs>
