@@ -9,6 +9,8 @@ export const useStyles = makeStyles((theme: Theme) => {
 		boxLeftPanels: {...boxOfPanels},
 		boxRightPanels: {...boxOfPanels},
 		textArea: {width: '100%', minHeight: '80px'},
-		textScripts: {width: '100%', minHeight: '80px', background: 'black', color: 'white'},
+		textAreaInput: {width: '100%', minHeight: '150px'},
+		textAreaResult: {width: '100%', minHeight: '150px'},
+		textScripts: {width: '100%', minHeight: '100px', background: 'black', color: 'white'},
 	});
 });

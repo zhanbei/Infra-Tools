@@ -4,6 +4,7 @@ import React from 'react';
 import {jsonStringifyWithOptions} from './builtin-scripts/stringify-object';
 import {IScriptDefinition} from './builtin-scripts/builtin-scripts';
 import {NavButtons} from './NavButtons';
+import {OperationsPanel} from './OperationsPanel';
 import {STRINGIFY_OPTIONS_DEFAULT, ResultOptions} from './ResultOptions';
 import {ScriptsPanel} from './ScriptsPanels';
 import {doEvalScripts} from './eval-scripts';
@@ -50,12 +51,12 @@ export const ScriptsHome = React.memo(() => {
 			<div className={classes.boxHolder}>
 				<div className={classes.boxLeftPanels}>
 					{renderUserInput()}
-					{renderOperations()}
 				</div>
 				<div className={classes.boxRightPanels}>
 					{renderResults()}
 				</div>
 			</div>
+			{renderOperations()}
 			{renderRawScripts()}
 		</div>
 	);
@@ -111,15 +112,16 @@ export const ScriptsHome = React.memo(() => {
 		<ScriptsPanel
 			label={builtinScripts ? `Input(${builtinScripts.labelInput})` : 'Input'}
 			children={(
-				<textarea className={classes.textArea} onChange={(event) => onTextChanged('input', event.target.value)} value={input}/>
+				<textarea className={classes.textAreaInput} onChange={(event) => onTextChanged('input', event.target.value)} value={input}/>
 			)}
 		/>
 	);
+	//<textarea className={classes.textArea}/>
 	const renderOperations = () => (
 		<ScriptsPanel
 			label={'Operations'}
 			children={(
-				<textarea className={classes.textArea}/>
+				<OperationsPanel/>
 			)}
 		/>
 	);
@@ -141,7 +143,7 @@ export const ScriptsHome = React.memo(() => {
 	const renderResults = () => (
 		<ScriptsPanel
 			label={builtinScripts ? `${builtinScripts.labelResult}(${status})` : `Raw Results(${status})`}
-			children={<textarea className={classes.textArea} onChange={(event) => onTextChanged('results', event.target.value)} value={editedResults || results.text || ''}/>}
+			children={<textarea className={classes.textAreaResult} onChange={(event) => onTextChanged('results', event.target.value)} value={editedResults || results.text || ''}/>}
 		/>
 	);
 
