@@ -19,13 +19,44 @@ A collection of tools to tailor texts, parse given texts with built-in formatter
 
 ## Panels and Editors
 
+There are basically 3 types of panels to focus on for a specific task:
+
+1. Input
+
+	User Input;
+	The Targeted Text;
+	Data Source;
+
+	- Plain Text
+
+2. Scripts
+
+	- Reconstruct String By Lines
+
+		To edit text by lines: Split by "\n"; Join with "\n".
+
+		- $handler `function`
+		- $no-Empty-Lines `boolean`
+		- Split by "\n"; Join with "\n".
+
+	- Operations Choices and Combinations
+
+		Visualized code editor with "Google Blockly".
+
+	- Raw Script
+	- Post Script
+
+3. Results
+
+	- Result
+
+		Compositions of Structured Data
+
+	- Visualization of Parsed Results
+
+	- Post Result
+
 - Input
-- Operations Choices and Combinations
-- Visualization of Parsed Results
-- Result
-	- Compositions of Structured Data
-- Raw Script
-- Post Script
 - Post Result
 
 ## Builtin Scripts
