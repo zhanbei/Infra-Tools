@@ -16,10 +16,11 @@ interface IProps {
 }
 
 const OPTIONS_BASE = {minified: false, useTabs: false, useSpaces: false, useSingleQuotes: false, noQuotesForKeys: false};
-const defaultOptions: IStringifyOptions = {useTabs: true, noQuotesForKeys: true};
 const OPTIONS_MINIFIED: IStringifyOptions = {...OPTIONS_BASE, minified: true};
 const OPTIONS_TABBED: IStringifyOptions = {...OPTIONS_BASE, useTabs: true};
-const OPTIONS_JS: IStringifyOptions = {...OPTIONS_BASE, useTabs: true, useSingleQuotes: true, noQuotesForKeys: true};
+const OPTIONS_JS: IStringifyOptions = {...OPTIONS_BASE, minified: true, useSingleQuotes: true, noQuotesForKeys: true};
+const OPTIONS_SET_DEFAULT = 'js';
+export const STRINGIFY_OPTIONS_DEFAULT: IStringifyOptions = OPTIONS_JS;
 
 const getOptionsBySet = (set: string): IStringifyOptions => {
 	switch (set) {
@@ -30,7 +31,7 @@ const getOptionsBySet = (set: string): IStringifyOptions => {
 		case 'js':
 			return OPTIONS_JS;
 		default:
-			return defaultOptions;
+			return STRINGIFY_OPTIONS_DEFAULT;
 	}
 };
 
@@ -57,8 +58,8 @@ const getTypeByOptions = ({minified, useTabs}: IStringifyOptions): string => {
 };
 
 export const ResultOptions = React.memo(({onChange}: IProps) => {
-	const [set, doSetOptionsSet] = React.useState('tabbed');
-	const [options, doSetOptions] = React.useState(getOptionsBySet(set));
+	const [set, doSetOptionsSet] = React.useState(OPTIONS_SET_DEFAULT);
+	const [options, doSetOptions] = React.useState(STRINGIFY_OPTIONS_DEFAULT);
 
 	const setOptionsSet = (set: string) => {
 		doSetOptionsSet(set);
@@ -77,9 +78,9 @@ export const ResultOptions = React.memo(({onChange}: IProps) => {
 				value={set} indicatorColor="primary" textColor="primary"
 				onChange={(event, tab) => setOptionsSet(tab)}
 			>
+				<Tab label="JS Object" value='js'/>
 				<Tab label="Minified JSON" value='minified'/>
 				<Tab label="Tabbed JSON" value='tabbed'/>
-				<Tab label="JS Object" value='js'/>
 			</Tabs>
 			<FormControl component='fieldset'>
 				<RadioGroup name='options-type' value={getTypeByOptions(options)} onChange={(event: React.ChangeEvent<HTMLInputElement>) => updateOptions(getOptionsByType(event.target.value))} row>

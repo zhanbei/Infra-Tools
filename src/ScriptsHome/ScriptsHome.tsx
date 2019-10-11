@@ -1,10 +1,10 @@
 'use strict';
 
 import React from 'react';
-import {IStringifyOptions, jsonStringifyWithOptions} from './builtin-scripts/stringify-object';
+import {jsonStringifyWithOptions} from './builtin-scripts/stringify-object';
 import {IScriptDefinition} from './builtin-scripts/builtin-scripts';
 import {NavButtons} from './NavButtons';
-import {ResultOptions} from './ResultOptions';
+import {STRINGIFY_OPTIONS_DEFAULT, ResultOptions} from './ResultOptions';
 import {ScriptsPanel} from './ScriptsPanels';
 import {doEvalScripts} from './eval-scripts';
 import {R} from './resources';
@@ -39,7 +39,7 @@ export const ScriptsHome = React.memo(() => {
 	const [editedResults, setEditedResults] = React.useState('');
 	const [status, setStatus] = React.useState(STATUS_INITIALIZED as STATUSES);
 	const [builtinScripts, setSelectedBuiltinScripts] = React.useState(undefined as IScriptDefinition | undefined);
-	const [stringifyOptions, setStringifyOptions] = React.useState({} as IStringifyOptions);
+	const [stringifyOptions, setStringifyOptions] = React.useState(STRINGIFY_OPTIONS_DEFAULT);
 
 	React.useEffect(() => {
 		doCalculate(input, rawScripts);
