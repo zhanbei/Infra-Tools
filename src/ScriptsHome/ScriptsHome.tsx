@@ -37,7 +37,6 @@ export const ScriptsHome = React.memo(() => {
 	const [rawScripts, setRawScripts] = React.useState('');
 	// const [useRawScripts, setUseRawScripts] = React.useState(false);
 	const [results, setResults] = React.useState({text: ''} as IResult);
-	const [editedResults, setEditedResults] = React.useState('');
 	const [status, setStatus] = React.useState(STATUS_INITIALIZED as STATUSES);
 	const [builtinScripts, setSelectedBuiltinScripts] = React.useState(undefined as IScriptDefinition | undefined);
 	const [stringifyOptions, setStringifyOptions] = React.useState(STRINGIFY_OPTIONS_DEFAULT);
@@ -77,7 +76,8 @@ export const ScriptsHome = React.memo(() => {
 				doCalculate(input, value);
 				break;
 			case 'results':
-				setEditedResults(value);
+				setResults({raw: value, text: ''});
+				doRevert(value);
 				break;
 		}
 	};
@@ -96,20 +96,24 @@ export const ScriptsHome = React.memo(() => {
 				const result = builtinScripts.handleInput(input);
 				setStatus(STATUS_CALCULATED);
 				setResults({raw: result, text: ''});
-				console.log('calculated:', input, scripts, result);
 				return;
 			}
 			const res = doEvalScripts(input, scripts);
 			if (res.output) {
 				setStatus(STATUS_CALCULATED);
 				setResults({raw: res.output, text: ''});
-				console.log('calculated:', input, scripts, res);
 			} else if (res.ex) {
 				setStatus(STATUS_ERROR_ENCOUNTERED);
 				setResults({raw: res.ex, text: res.ex.name + ': ' + res.ex.message});
-				console.log('error:', input, scripts, res.ex.name, res.ex.message, res.ex.stack);
 			}
 		}, pausingTime);
+	};
+
+	const doRevert = (input: string) => {
+		if (!builtinScripts) {return;}
+		const result = builtinScripts.handleResult(input);
+		setStatus(STATUS_CALCULATED);
+		setInput(result);
 	};
 
 	const renderUserInput = () => (
@@ -147,7 +151,7 @@ export const ScriptsHome = React.memo(() => {
 	const renderResults = () => (
 		<ScriptsPanel
 			label={builtinScripts ? `${builtinScripts.labelResult}(${status})` : `Raw Results(${status})`}
-			children={<textarea className={classes.textAreaResult} onChange={(event) => onTextChanged('results', event.target.value)} value={editedResults || results.text || ''}/>}
+			children={<textarea className={classes.textAreaResult} onChange={(event) => onTextChanged('results', event.target.value)} value={results.text || ''}/>}
 		/>
 	);
 
