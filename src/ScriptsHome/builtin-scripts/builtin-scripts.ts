@@ -1,6 +1,7 @@
 'use strict';
 
 import {ScriptCssInJs} from './css-in-js';
+import {Base64Transcoding} from './transcoding-base64';
 
 export interface IBaseScript {
 	name: string;
@@ -9,7 +10,7 @@ export interface IBaseScript {
 	labelResult: string;
 }
 
-// Encoder & Decoder
+// Base64Encoding: Encoder & Decoder
 // Parse & Stringify
 export interface IScriptConverter extends IBaseScript {
 	handleInput: (input: string) => object | string,
@@ -20,4 +21,5 @@ export type IScriptDefinition = IScriptConverter
 
 export const BuiltinScripts = {
 	cssInJs: ScriptCssInJs,
+	base64Transcoding: Base64Transcoding,
 };
