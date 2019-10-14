@@ -46,6 +46,10 @@ export const ScriptsHome = React.memo(() => {
 		doCalculate(input, rawScripts);
 	}, [builtinScripts]);
 
+	const onCodeChanged = (code: string) => {
+		setRawScripts(code);
+	};
+
 	const renderAppBody = () => (
 		<div style={{flex: 1, margin: '0 auto', maxWidth: '960px'}}>
 			<div className={classes.boxHolder}>
@@ -121,7 +125,7 @@ export const ScriptsHome = React.memo(() => {
 		<ScriptsPanel
 			label={'Operations'}
 			children={(
-				<OperationsPanel/>
+				<OperationsPanel onCodeChanged={onCodeChanged}/>
 			)}
 		/>
 	);
