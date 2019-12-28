@@ -9,7 +9,7 @@ export interface IMenuScriptItem extends IMenuItem {
 
 export const AppMenuScript = getAppSecondaryMenu<IMenuScriptItem, IMenuSection<IMenuScriptItem>>();
 
-const newMenuItem = (id: string, name: string, scripts?: IScriptDefinition, color?: string): IMenuScriptItem => ({id, name, color, scripts});
+const newMenuItem = (_id: string, name: string, scripts?: IScriptDefinition, color?: string): IMenuScriptItem => ({_id, name, color, scripts});
 
 const scripts = BuiltinScripts;
 // const newSection = (id: string, name: string, items: IMenuScriptItem[]): IMenuSection<IMenuScriptItem> => ({id, name, items});
@@ -22,7 +22,7 @@ const secPrimaryTools: IMenuSection = newMenuSection<IMenuScriptItem>('tools', '
 	newMenuItem('base64', 'Base64', scripts.base64Transcoding, '#33f'),
 ]);
 const sections = [secPrimaryTools];
-const defaultMenuItemId = sections[0].items[0].id;
+const defaultMenuItemId = sections[0].items[0]._id;
 
 const getTargetScripts = (entryId: string): IScriptDefinition | undefined => {
 	switch (entryId) {

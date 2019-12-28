@@ -13,7 +13,7 @@ interface IProps {
 export const AppMenus = React.memo(({selectedMenuItem, onSelected}: IProps) => (
 	<AppMenuScript
 		sections={RR.sections} color={'#099'}
-		selectedMenuItemId={selectedMenuItem?.id || RR.defaultMenuItemId}
+		selectedMenuItemId={selectedMenuItem?._id || RR.defaultMenuItemId}
 		// TODO Make it generic to support more features.
 		onSelect={(entryId, entry) => onSelected(entry)}
 	/>
