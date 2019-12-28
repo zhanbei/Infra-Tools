@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {LayoutEmbeddedApp} from '../../components/LayoutEmbeddedApp';
+import {LayoutAppHeader} from '../../components/LayoutAppHeader';
 import {ScriptsHome} from '../ScriptsHome/ScriptsHome';
 import {AppMenus} from '../Text-Tailor/AppMenus';
 import {IMenuScriptItem} from '../Text-Tailor/AppMenus.resources';
@@ -29,7 +29,7 @@ export const AppHome = () => {
 
 	document.title = title;
 	return (
-		<LayoutEmbeddedApp
+		<LayoutAppHeader
 			title={title}
 			body={renderRealBody()}
 			nav={<AppMenus onSelected={setMenuItem} selectedMenuItem={menuItem}/>}
