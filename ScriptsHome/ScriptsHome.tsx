@@ -25,12 +25,16 @@ const STATUS_WAITING: STATUSES = 'waiting';
 const STATUS_CALCULATED: STATUSES = 'calculated';
 const STATUS_ERROR_ENCOUNTERED: STATUSES = 'error';
 
+interface IProps {
+	builtinScripts?: IScriptDefinition;
+}
+
 interface IResult {
 	raw?: string | object;
 	text: string;
 }
 
-export const ScriptsHome = React.memo(() => {
+export const ScriptsHome = React.memo(({builtinScripts}: IProps) => {
 	const classes = useStyles();
 
 	const [input, setInput] = React.useState('');
@@ -38,7 +42,6 @@ export const ScriptsHome = React.memo(() => {
 	// const [useRawScripts, setUseRawScripts] = React.useState(false);
 	const [results, setResults] = React.useState({text: ''} as IResult);
 	const [status, setStatus] = React.useState(STATUS_INITIALIZED as STATUSES);
-	const [builtinScripts, setSelectedBuiltinScripts] = React.useState(undefined as IScriptDefinition | undefined);
 	const [stringifyOptions, setStringifyOptions] = React.useState(STRINGIFY_OPTIONS_DEFAULT);
 
 	React.useEffect(() => {
@@ -159,7 +162,6 @@ export const ScriptsHome = React.memo(() => {
 	document.title = title;
 	return (
 		<div style={{display: 'flex'}}>
-			<NavButtons onSelected={setSelectedBuiltinScripts}/>
 			{renderAppBody()}
 			<ResultOptions onChange={setStringifyOptions}/>
 		</div>
