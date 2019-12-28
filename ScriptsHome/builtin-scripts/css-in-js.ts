@@ -12,6 +12,7 @@ export const parseCssToObject = (cssText: string): object => {
 	const cssTxt = cssText.replace(/\/\*(.|\s)*?\*\//g, ' ').replace(/\s+/g, ' ');
 	const style = {};
 	const [, , rule] = cssTxt.match(/ ?(.*?) ?{([^}]*)}/) || [, , cssTxt];
+	if (!rule) {return {};}
 	const properties = rule.split(';').map(o => o.split(':').map(x => x && x.trim()));
 	for (let [property, value] of properties) {
 		style[cssToJs(property)] = value;

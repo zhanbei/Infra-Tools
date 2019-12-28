@@ -125,14 +125,14 @@ export const ScriptsHome = React.memo(() => {
 		/>
 	);
 	//<textarea className={classes.textArea}/>
-	const renderOperations = () => (
+	const renderOperations = () => window['Blockly'] ? (
 		<ScriptsPanel
 			label={'Operations'}
 			children={(
 				<OperationsPanel onCodeChanged={onCodeChanged}/>
 			)}
 		/>
-	);
+	) : undefined;
 	const renderRawScripts = () => !builtinScripts ? (
 		<ScriptsPanel
 			label={'Raw Scripts'}
