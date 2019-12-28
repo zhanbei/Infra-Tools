@@ -3,7 +3,7 @@
 import React from 'react';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import {green, purple} from '@material-ui/core/colors';
-import {createColoredButton} from 'src/components/ColoredButton';
+import {createColoredButton} from 'components/ColoredButton';
 import {BuiltinScripts, IScriptDefinition} from './builtin-scripts/builtin-scripts';
 
 const PurpleButton = createColoredButton(purple[400], purple[700]);
