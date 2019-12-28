@@ -59,8 +59,8 @@ export const ScriptsHome = React.memo(() => {
 					{renderResults()}
 				</div>
 			</div>
-			{renderOperations()}
 			{renderRawScripts()}
+			{renderOperations()}
 		</div>
 	);
 

@@ -15,7 +15,7 @@ const options = {
 	toolboxPosition: 'start',
 	css: true,
 	// media: 'https://blockly-demo.appspot.com/static/media/',
-	media: 'http://localhost:8123/media/',
+	media: 'https://blockly.lovecust.com/media/',
 	rtl: false,
 	scrollbars: true,
 	sounds: true,
