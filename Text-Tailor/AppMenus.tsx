@@ -1,12 +1,11 @@
 //
 
 import React from 'react';
-import {IScriptDefinition} from '../ScriptsHome/builtin-scripts/builtin-scripts';
 import {AppMenuScript, IMenuScriptItem, RR} from './AppMenus.resources';
 
 interface IProps {
 	selectedMenuItem?: IMenuScriptItem;
-	onSelected: (entry: IMenuScriptItem, script?: IScriptDefinition) => any;
+	onSelected: (entry: IMenuScriptItem) => any;
 }
 
 
@@ -16,6 +15,6 @@ export const AppMenus = React.memo(({selectedMenuItem, onSelected}: IProps) => (
 		sections={RR.sections} color={'#099'}
 		selectedMenuItemId={selectedMenuItem?.id || RR.defaultMenuItemId}
 		// TODO Make it generic to support more features.
-		onSelect={(entryId, entry) => onSelected(entry, RR.getTargetScripts(entryId))}
+		onSelect={(entryId, entry) => onSelected(entry)}
 	/>
 ));

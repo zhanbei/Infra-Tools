@@ -9,7 +9,7 @@ export interface IMenuScriptItem extends IMenuItem {
 
 export const AppMenuScript = getAppSecondaryMenu<IMenuScriptItem, IMenuSection<IMenuScriptItem>>();
 
-const newMenuItem = (id: string, name: string, scripts?: IScriptDefinition): IMenuScriptItem => ({id, name, scripts});
+const newMenuItem = (id: string, name: string, scripts?: IScriptDefinition, color?: string): IMenuScriptItem => ({id, name, color, scripts});
 
 const scripts = BuiltinScripts;
 // const newSection = (id: string, name: string, items: IMenuScriptItem[]): IMenuSection<IMenuScriptItem> => ({id, name, items});
@@ -17,9 +17,9 @@ const scripts = BuiltinScripts;
 // Currently there is only one default group, named as "Primary Tools" or "Classic Tools".
 // The tools may be grouped by professions(domains), like developers/students/accountants/personal.
 const secPrimaryTools: IMenuSection = newMenuSection<IMenuScriptItem>('tools', 'Available Tools', [
-	newMenuItem('custom', 'Custom Scripts'),
-	newMenuItem('css-in-js', 'CSS in JS', scripts.cssInJs),
-	newMenuItem('base64', 'Base64', scripts.base64Transcoding),
+	newMenuItem('custom', 'Custom Scripts', undefined, 'green'),
+	newMenuItem('css-in-js', 'CSS in JS', scripts.cssInJs, '#8a2be2'), // blueviolet
+	newMenuItem('base64', 'Base64', scripts.base64Transcoding, '#33f'),
 ]);
 const sections = [secPrimaryTools];
 const defaultMenuItemId = sections[0].items[0].id;
