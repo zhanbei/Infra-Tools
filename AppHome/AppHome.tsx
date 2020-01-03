@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {LayoutAppHeader} from '../../components/LayoutAppHeader';
+import {LayoutAppHeader} from 'src/mui-views/app/LayoutAppHeader';
 import {ScriptsHome} from '../ScriptsHome/ScriptsHome';
 import {AppMenus} from '../Text-Tailor/AppMenus';
 import {IMenuScriptItem} from '../Text-Tailor/AppMenus.resources';

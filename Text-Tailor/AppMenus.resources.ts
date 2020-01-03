@@ -1,6 +1,6 @@
 //
 
-import {getAppSecondaryMenu, IMenuItem, IMenuSection, newMenuSection} from '../../components/AppSecondaryMenu';
+import {getAppSecondaryMenu, IMenuItem, IMenuSection, newMenuSection} from 'src/mui-views/app/AppSecondaryMenu';
 import {BuiltinScripts, IScriptDefinition} from '../ScriptsHome/builtin-scripts/builtin-scripts';
 
 export interface IMenuScriptItem extends IMenuItem {
